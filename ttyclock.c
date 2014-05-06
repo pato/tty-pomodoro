@@ -578,7 +578,7 @@ int main(int argc, char **argv){
           {
           case 'h':
           default:
-               printf("usage : tty-clock [-ivScbrahBxn] [-C [0-7]] [-f format] [-d delay] [-a nsdelay] [-T tty] \n"
+               printf("usage : tty-clock [-ivScbrahBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] \n"
                       "    -S            Screensaver mode                               \n"
                       "    -x            Show box                                       \n"
                       "    -c            Set the clock at the center of the terminal    \n"
