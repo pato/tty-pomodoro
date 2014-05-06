@@ -4,7 +4,7 @@
 
 SRC = ttyclock.c
 CC ?= gcc
-BIN = tty-clock
+BIN = tty-pomodoro
 PREFIX ?= /usr/local
 INSTALLPATH = ${DESTDIR}${PREFIX}/bin
 MANPATH = ${DESTDIR}${PREFIX}/share/man/man1
@@ -20,7 +20,7 @@ endif
 
 
 
-tty-clock : ${SRC}
+tty-pomodoro: ${SRC}
 
 	@echo "build ${SRC}"
 	@echo "CC ${CFLAGS} ${LDFLAGS} ${SRC}"
