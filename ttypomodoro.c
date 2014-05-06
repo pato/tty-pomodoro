@@ -527,7 +527,7 @@ void key_event(void){
 }
 
 void print_usage(){
-   printf("usage : tty-clock [-ivcbrahBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] \n"
+   printf("usage : tty-clock [-ivcbrahBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] [short | long]\n"
               "    -x            Show box                                       \n"
               "    -c            Set the timer at the center of the terminal    \n"
               "    -C [0-7]      Set the clock color                            \n"
@@ -540,7 +540,9 @@ void print_usage(){
               "    -h            Show this page                                 \n"
               "    -B            Enable blinking colon                          \n"
               "    -d delay      Set the delay between two redraws of the timer . Default 1s. \n"
-              "    -a nsdelay    Additional delay between two redraws in nanoseconds. Default 0ns.\n");
+              "    -a nsdelay    Additional delay between two redraws in nanoseconds. Default 0ns.\n"
+              "    short         Take a five minute break                       \n"
+              "    long          Take a ten minute break                        \n");
 }
 
 int main(int argc, char **argv){
