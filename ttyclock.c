@@ -573,13 +573,12 @@ int main(int argc, char **argv){
 
      atexit(cleanup);
 
-     while ((c = getopt(argc, argv, "iuvsScbtrhBxnC:f:d:T:a:")) != -1){
+     while ((c = getopt(argc, argv, "iuvScbtrhBxnC:d:T:a:")) != -1){
           switch(c)
           {
           case 'h':
           default:
                printf("usage : tty-clock [-iuvsScbtrahDBxn] [-C [0-7]] [-f format] [-d delay] [-a nsdelay] [-T tty] \n"
-                      "    -s            Show seconds                                   \n"
                       "    -S            Screensaver mode                               \n"
                       "    -x            Show box                                       \n"
                       "    -c            Set the clock at the center of the terminal    \n"
@@ -608,9 +607,6 @@ int main(int argc, char **argv){
           case 'v':
                puts("TTY-Clock 2 © devel version");
                exit(EXIT_SUCCESS);
-               break;
-          case 's':
-               ttyclock->option.second = True;
                break;
           case 'S':
                ttyclock->option.screensaver = True;
