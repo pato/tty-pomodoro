@@ -639,15 +639,15 @@ int main(int argc, char **argv){
      }
 
      /* Set the default minutes to 25 */
-     start_minutes = 25;
+     start_minutes = DEFAULT_TIME;
 
      /* Check if short or long break */
      if (optind < argc){
         char *argument = argv[optind];
         if (!strcmp(argument, "short")){
-            start_minutes = 5;
+            start_minutes = SHORT_BREAK;
         }else if (!strcmp(argument, "long")){
-            start_minutes = 10;
+            start_minutes = LONG_BREAK;
         }else{
             printf("Command not recognized\n");
             print_usage();

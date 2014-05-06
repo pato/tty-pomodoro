@@ -52,6 +52,11 @@
 #define AMSIGN     " [AM]"
 #define PMSIGN     " [PM]"
 
+/* Time intervals */
+#define DEFAULT_TIME 25
+#define SHORT_BREAK 5
+#define LONG_BREAK 10
+
 typedef enum { False, True } Bool;
 
 /* Global ttyclock struct */
