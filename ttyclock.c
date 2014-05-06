@@ -210,22 +210,15 @@ void update_hour(void){
 
      c_second = time_diff - (c_minute*60);
      c_second = c_second > 0 ? c_second : 0;
-     c_second = c_second < 60 ? c_second : 60;
+     c_second = c_second < 60 ? c_second : 0;
      c_minute = time_diff/60;
-     //c_second = (time_diff/(CLOCKS_PER_SEC))-(c_minute*60);
-     //c_minute = (time_diff/(CLOCKS_PER_SEC))/60;
-     //printf("seconds: %d\n", (c_second));
     
 
      /* Set hour */
-     //ttyclock->date.hour[0] = ihour / 10;
-     //ttyclock->date.hour[1] = ihour % 10;
      ttyclock->date.hour[0] = c_minute / 10;
      ttyclock->date.hour[1] = c_minute % 10;
 
      /* Set minutes */
-     //ttyclock->date.minute[0] = ttyclock->tm->tm_min / 10;
-     //ttyclock->date.minute[1] = ttyclock->tm->tm_min % 10;
      ttyclock->date.minute[0] = c_second / 10;
      ttyclock->date.minute[1] = c_second % 10;
 
@@ -237,8 +230,6 @@ void update_hour(void){
      sprintf(ttyclock->date.datestr, "%s%s", tmpstr, ttyclock->meridiem);
 
      /* Set seconds */
-     //ttyclock->date.second[0] = ttyclock->tm->tm_sec / 10;
-     //ttyclock->date.second[1] = ttyclock->tm->tm_sec % 10;
      ttyclock->date.second[0] = c_second / 10;
      ttyclock->date.second[1] = c_second % 10;
 
