@@ -32,6 +32,8 @@
 
 #include "ttyclock.h"
 
+static time_t start_time;
+
 void init(void){
      struct sigaction sig;
      ttyclock->bg = COLOR_BLACK;
@@ -132,6 +134,10 @@ void init(void){
 
      wrefresh(ttyclock->framewin);
 
+     /* Initialize the clock timer */
+
+     start_time = time(0);
+
      return;
 }
 
@@ -192,10 +198,23 @@ void update_hour(void){
      ihour = ((ttyclock->option.twelve && !ihour) ? 12 : ihour);
 
      /* Custom hour, minute, second */
-    
-     unsigned int c_hour = 12;
-     unsigned int c_minute = 15;
-     unsigned int c_second = 20;
+
+     static unsigned int c_hour = 0, c_minute = 25, c_second = 0;
+
+     /* Calculate the time remaining */
+
+     time_t curr_time = time(0);
+     unsigned int time_diff = curr_time - start_time;
+
+     time_diff = 25*60 - time_diff;
+
+     c_second = time_diff - (c_minute*60);
+     c_second = c_second > 0 ? c_second : 0;
+     c_second = c_second < 60 ? c_second : 60;
+     c_minute = time_diff/60;
+     //c_second = (time_diff/(CLOCKS_PER_SEC))-(c_minute*60);
+     //c_minute = (time_diff/(CLOCKS_PER_SEC))/60;
+     //printf("seconds: %d\n", (c_second));
     
 
      /* Set hour */
@@ -562,6 +581,9 @@ int main(int argc, char **argv){
      ttyclock->option.delay = 1; /* 1FPS */
      ttyclock->option.nsdelay = 0; /* -0FPS */
      ttyclock->option.blink = False;
+
+     /* Always show seconds */
+     //ttyclock->option.second = True;
 
      atexit(cleanup);
 
