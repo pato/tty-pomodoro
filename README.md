@@ -3,6 +3,8 @@ tty-pomodoro
 
 A terminal based pomodoro timer
 
+![screenshot](media/screenshot_cropped.png)
+
 Current status: in development
 
 TODO:
