@@ -178,7 +178,6 @@ void cleanup(void){
 
 void update_hour(void){
      int ihour;
-     char tmpstr[128];
 
      ttyclock->tm = localtime(&(ttyclock->lt));
      if(ttyclock->option.utc) {
@@ -199,7 +198,7 @@ void update_hour(void){
 
      /* Custom hour, minute, second */
 
-     static unsigned int c_hour = 0, c_minute = 25, c_second = 0;
+     static unsigned int c_minute = 25, c_second = 0;
 
      /* Calculate the time remaining */
 
@@ -213,7 +212,6 @@ void update_hour(void){
      c_second = c_second < 60 ? c_second : 0;
      c_minute = time_diff/60;
     
-
      /* Set hour */
      ttyclock->date.hour[0] = c_minute / 10;
      ttyclock->date.hour[1] = c_minute % 10;
@@ -222,12 +220,6 @@ void update_hour(void){
      ttyclock->date.minute[0] = c_second / 10;
      ttyclock->date.minute[1] = c_second % 10;
 
-     /* Set date string */
-     strftime(tmpstr,
-              sizeof(tmpstr),
-              ttyclock->option.format,
-              ttyclock->tm);
-     sprintf(ttyclock->date.datestr, "%s%s", tmpstr, ttyclock->meridiem);
 
      /* Set seconds */
      ttyclock->date.second[0] = c_second / 10;
@@ -574,7 +566,10 @@ int main(int argc, char **argv){
      ttyclock->option.blink = False;
 
      /* Always show seconds */
-     //ttyclock->option.second = True;
+     ttyclock->option.second = False;
+
+     /* Hide the date */
+     ttyclock->option.date = False;
 
      atexit(cleanup);
 
