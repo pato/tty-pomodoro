@@ -191,13 +191,24 @@ void update_hour(void){
      ihour = ((ttyclock->option.twelve && ihour > 12)  ? (ihour - 12) : ihour);
      ihour = ((ttyclock->option.twelve && !ihour) ? 12 : ihour);
 
+     /* Custom hour, minute, second */
+    
+     int c_hour = 12;
+     int c_minute = 15;
+     int c_second = 20;
+    
+
      /* Set hour */
-     ttyclock->date.hour[0] = ihour / 10;
-     ttyclock->date.hour[1] = ihour % 10;
+     //ttyclock->date.hour[0] = ihour / 10;
+     //ttyclock->date.hour[1] = ihour % 10;
+     ttyclock->date.hour[0] = c_hour / 10;
+     ttyclock->date.hour[1] = c_hour % 10;
 
      /* Set minutes */
-     ttyclock->date.minute[0] = ttyclock->tm->tm_min / 10;
-     ttyclock->date.minute[1] = ttyclock->tm->tm_min % 10;
+     //ttyclock->date.minute[0] = ttyclock->tm->tm_min / 10;
+     //ttyclock->date.minute[1] = ttyclock->tm->tm_min % 10;
+     ttyclock->date.minute[0] = c_minute / 10;
+     ttyclock->date.minute[1] = c_minute % 10;
 
      /* Set date string */
      strftime(tmpstr,
@@ -207,8 +218,10 @@ void update_hour(void){
      sprintf(ttyclock->date.datestr, "%s%s", tmpstr, ttyclock->meridiem);
 
      /* Set seconds */
-     ttyclock->date.second[0] = ttyclock->tm->tm_sec / 10;
-     ttyclock->date.second[1] = ttyclock->tm->tm_sec % 10;
+     //ttyclock->date.second[0] = ttyclock->tm->tm_sec / 10;
+     //ttyclock->date.second[1] = ttyclock->tm->tm_sec % 10;
+     ttyclock->date.second[0] = c_second / 10;
+     ttyclock->date.second[1] = c_second % 10;
 
      return;
 }
@@ -552,8 +565,7 @@ int main(int argc, char **argv){
 
      atexit(cleanup);
 
-     while ((c = getopt(argc, argv, "iuvsScbtrhBxnDC:f:d:T:a:")) != -1)
-     {
+     while ((c = getopt(argc, argv, "iuvsScbtrhBxnDC:f:d:T:a:")) != -1){
           switch(c)
           {
           case 'h':
