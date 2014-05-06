@@ -220,14 +220,14 @@ void update_hour(void){
      /* Set hour */
      //ttyclock->date.hour[0] = ihour / 10;
      //ttyclock->date.hour[1] = ihour % 10;
-     ttyclock->date.hour[0] = c_hour / 10;
-     ttyclock->date.hour[1] = c_hour % 10;
+     ttyclock->date.hour[0] = c_minute / 10;
+     ttyclock->date.hour[1] = c_minute % 10;
 
      /* Set minutes */
      //ttyclock->date.minute[0] = ttyclock->tm->tm_min / 10;
      //ttyclock->date.minute[1] = ttyclock->tm->tm_min % 10;
-     ttyclock->date.minute[0] = c_minute / 10;
-     ttyclock->date.minute[1] = c_minute % 10;
+     ttyclock->date.minute[0] = c_second / 10;
+     ttyclock->date.minute[1] = c_second % 10;
 
      /* Set date string */
      strftime(tmpstr,
