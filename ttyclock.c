@@ -32,9 +32,7 @@
 
 #include "ttyclock.h"
 
-void
-init(void)
-{
+void init(void){
      struct sigaction sig;
      ttyclock->bg = COLOR_BLACK;
 
@@ -137,9 +135,7 @@ init(void)
      return;
 }
 
-void
-signal_handler(int signal)
-{
+void signal_handler(int signal){
      switch(signal)
      {
      case SIGWINCH:
@@ -162,9 +158,7 @@ signal_handler(int signal)
      return;
 }
 
-void
-cleanup(void)
-{
+void cleanup(void){
 	if (ttyclock->ttyscr)
 		delscreen(ttyclock->ttyscr);
 
@@ -176,9 +170,7 @@ cleanup(void)
 		free(ttyclock);
 }
 
-void
-update_hour(void)
-{
+void update_hour(void){
      int ihour;
      char tmpstr[128];
 
@@ -221,9 +213,7 @@ update_hour(void)
      return;
 }
 
-void
-draw_number(int n, int x, int y)
-{
+void draw_number(int n, int x, int y){
      int i, sy = y;
 
      for(i = 0; i < 30; ++i, ++sy)
@@ -247,9 +237,7 @@ draw_number(int n, int x, int y)
      return;
 }
 
-void
-draw_clock(void)
-{
+void draw_clock(void){
      /* Draw hour numbers */
      draw_number(ttyclock->date.hour[0], 1, 1);
      draw_number(ttyclock->date.hour[1], 1, 8);
@@ -311,9 +299,7 @@ draw_clock(void)
      return;
 }
 
-void
-clock_move(int x, int y, int w, int h)
-{
+void clock_move(int x, int y, int w, int h){
 
      /* Erase border for a clean move */
      wbkgdset(ttyclock->framewin, COLOR_PAIR(0));
@@ -357,9 +343,7 @@ clock_move(int x, int y, int w, int h)
 }
 
 /* Useless but fun :) */
-void
-clock_rebound(void)
-{
+void clock_rebound(void){
      if(!ttyclock->option.rebound)
           return;
 
@@ -380,9 +364,7 @@ clock_rebound(void)
      return;
 }
 
-void
-set_second(void)
-{
+void set_second(void){
      int new_w = (((ttyclock->option.second = !ttyclock->option.second)) ? SECFRAMEW : NORMFRAMEW);
      int y_adj;
 
@@ -395,9 +377,7 @@ set_second(void)
      return;
 }
 
-void
-set_center(Bool b)
-{
+void set_center(Bool b){
      if((ttyclock->option.center = b))
      {
           ttyclock->option.rebound = False;
@@ -411,9 +391,7 @@ set_center(Bool b)
      return;
 }
 
-void
-set_box(Bool b)
-{
+void set_box(Bool b){
      ttyclock->option.box = b;
 
      wbkgdset(ttyclock->framewin, COLOR_PAIR(0));
@@ -434,9 +412,7 @@ set_box(Bool b)
      wrefresh(ttyclock->framewin);
 }
 
-void
-key_event(void)
-{
+void key_event(void){
      int i, c;
 
      struct timespec length = { ttyclock->option.delay, ttyclock->option.nsdelay };
@@ -553,9 +529,7 @@ key_event(void)
      return;
 }
 
-int
-main(int argc, char **argv)
-{
+int main(int argc, char **argv){
      int c;
 
      /* Alloc ttyclock */
@@ -683,8 +657,7 @@ main(int argc, char **argv)
 
      init();
      attron(A_BLINK);
-     while(ttyclock->running)
-     {
+     while(ttyclock->running){
           clock_rebound();
           update_hour();
           draw_clock();
