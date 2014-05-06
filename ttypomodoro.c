@@ -184,10 +184,15 @@ void update_hour(void){
      unsigned int time_diff = curr_time - start_time;
      time_diff = start_minutes*60 - time_diff;
 
+     /* Calculate seconds and minutes remaining */
      c_second = time_diff - (c_minute*60);
      c_second = c_second > 0 ? c_second : 0;
      c_second = c_second < 60 ? c_second : 0;
      c_minute = time_diff/60;
+
+     if (c_minute == 0 && c_second == 0){
+        time_ended();
+     }
     
      /* Set hour */
      ttyclock->date.hour[0] = c_minute / 10;
@@ -197,12 +202,13 @@ void update_hour(void){
      ttyclock->date.minute[0] = c_second / 10;
      ttyclock->date.minute[1] = c_second % 10;
 
-
-     /* Set seconds */
-     ttyclock->date.second[0] = c_second / 10;
-     ttyclock->date.second[1] = c_second % 10;
-
      return;
+}
+
+void time_ended(){
+    printf("Time ended!\n");
+    exit(EXIT_SUCCESS);
+    return;
 }
 
 void draw_number(int n, int x, int y){
