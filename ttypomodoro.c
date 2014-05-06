@@ -33,6 +33,7 @@
 #include "ttypomodoro.h"
 
 static time_t start_time;
+static unsigned int start_minutes;
 
 void init(void){
      struct sigaction sig;
@@ -173,35 +174,15 @@ void cleanup(void){
 }
 
 void update_hour(void){
-     int ihour;
+     /* Static minute and hour counts so future calls can read previous values */
+     static unsigned int c_minute = 0, c_second = 0;
 
-     ttyclock->tm = localtime(&(ttyclock->lt));
-     if(ttyclock->option.utc) {
-         ttyclock->tm = gmtime(&(ttyclock->lt));
-     }
-     ttyclock->lt = time(NULL);
-
-     ihour = ttyclock->tm->tm_hour;
-
-     if(ttyclock->option.twelve)
-          ttyclock->meridiem = ((ihour > 12) ? PMSIGN : AMSIGN);
-     else
-          ttyclock->meridiem = "\0";
-
-     /* Manage hour for twelve mode */
-     ihour = ((ttyclock->option.twelve && ihour > 12)  ? (ihour - 12) : ihour);
-     ihour = ((ttyclock->option.twelve && !ihour) ? 12 : ihour);
-
-     /* Custom hour, minute, second */
-
-     static unsigned int c_minute = 25, c_second = 0;
+     /* Get current time */
+     time_t curr_time = time(0);
 
      /* Calculate the time remaining */
-
-     time_t curr_time = time(0);
      unsigned int time_diff = curr_time - start_time;
-
-     time_diff = 25*60 - time_diff;
+     time_diff = start_minutes*60 - time_diff;
 
      c_second = time_diff - (c_minute*60);
      c_second = c_second > 0 ? c_second : 0;
@@ -651,19 +632,21 @@ int main(int argc, char **argv){
           }
      }
 
+     /* Set the default minutes to 25 */
+     start_minutes = 25;
+
      /* Check if short or long break */
      if (optind < argc){
         char *argument = argv[optind];
         if (!strcmp(argument, "short")){
-           printf("short"); 
+            start_minutes = 5;
         }else if (!strcmp(argument, "long")){
-            printf("long");
+            start_minutes = 10;
         }else{
             printf("Command not recognized\n");
             print_usage();
             exit(EXIT_FAILURE);
         }
-        exit(EXIT_SUCCESS);
      }
 
      init();
