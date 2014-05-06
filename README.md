@@ -11,6 +11,7 @@ TODO:
 * add option for short (5 minute) and long (10 minute) breaks
 * fix issue with 59 and 60 seconds not showing
 * add a notification or sound at the end of time
+* remove all old references to tty-clock
 
 usage : tty-pomodoro [-ivsScbtrahDBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] 
     -S            Screensaver mode                               
