@@ -186,7 +186,6 @@ void update_hour(void){
 
      /* Calculate seconds and minutes remaining */
      c_second = time_diff - (c_minute*60);
-     c_second = c_second > 0 ? c_second : 0;
      c_second = c_second < 60 ? c_second : 0;
      c_minute = time_diff/60;
 
