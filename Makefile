@@ -2,7 +2,7 @@
 #Under BSD License
 #See clock.c for the license detail.
 
-SRC = ttyclock.c
+SRC = ttypomodoro.c
 CC ?= gcc
 BIN = tty-pomodoro
 PREFIX ?= /usr/local

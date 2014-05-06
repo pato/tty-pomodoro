@@ -30,7 +30,7 @@
  *      OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ttyclock.h"
+#include "ttypomodoro.h"
 
 static time_t start_time;
 
