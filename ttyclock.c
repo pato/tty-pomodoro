@@ -573,18 +573,17 @@ int main(int argc, char **argv){
 
      atexit(cleanup);
 
-     while ((c = getopt(argc, argv, "iuvScbtrhBxnC:d:T:a:")) != -1){
+     while ((c = getopt(argc, argv, "iuvScbrhBxnC:d:T:a:")) != -1){
           switch(c)
           {
           case 'h':
           default:
-               printf("usage : tty-clock [-iuvsScbtrahDBxn] [-C [0-7]] [-f format] [-d delay] [-a nsdelay] [-T tty] \n"
+               printf("usage : tty-clock [-iuvScbrahBxn] [-C [0-7]] [-f format] [-d delay] [-a nsdelay] [-T tty] \n"
                       "    -S            Screensaver mode                               \n"
                       "    -x            Show box                                       \n"
                       "    -c            Set the clock at the center of the terminal    \n"
                       "    -C [0-7]      Set the clock color                            \n"
                       "    -b            Use bold colors                                \n"
-                      "    -t            Set the hour in 12h format                     \n"
                       "    -u            Use UTC time                                   \n"
 		              "    -T tty        Display the clock on the specified terminal    \n"
                       "    -r            Do rebound the clock                           \n"
@@ -620,9 +619,6 @@ int main(int argc, char **argv){
           case 'C':
                if(atoi(optarg) >= 0 && atoi(optarg) < 8)
                     ttyclock->option.color = atoi(optarg);
-               break;
-          case 't':
-               ttyclock->option.twelve = True;
                break;
           case 'r':
                ttyclock->option.rebound = True;
