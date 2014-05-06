@@ -67,9 +67,6 @@ void init(void){
      init_pair(0, ttyclock->bg, ttyclock->bg);
      init_pair(1, ttyclock->bg, ttyclock->option.color);
      init_pair(2, ttyclock->option.color, ttyclock->bg);
-//     init_pair(0, ttyclock->bg, ttyclock->bg);
-//     init_pair(1, ttyclock->bg, ttyclock->option.color);
-//     init_pair(2, ttyclock->option.color, ttyclock->bg);
      refresh();
 
      /* Init signal handler */
@@ -134,8 +131,7 @@ void init(void){
 
      wrefresh(ttyclock->framewin);
 
-     /* Initialize the clock timer */
-
+     /* Initialize the start timer */
      start_time = time(0);
 
      return;
@@ -544,6 +540,23 @@ void key_event(void){
      return;
 }
 
+void print_usage(){
+   printf("usage : tty-clock [-ivcbrahBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] \n"
+              "    -x            Show box                                       \n"
+              "    -c            Set the clock at the center of the terminal    \n"
+              "    -C [0-7]      Set the clock color                            \n"
+              "    -b            Use bold colors                                \n"
+              "    -T tty        Display the clock on the specified terminal    \n"
+              "    -r            Do rebound the clock                           \n"
+              "    -n            Don't quit on keypress                         \n"
+              "    -v            Show tty-clock version                         \n"
+              "    -i            Show some info about tty-clock                 \n"
+              "    -h            Show this page                                 \n"
+              "    -B            Enable blinking colon                          \n"
+              "    -d delay      Set the delay between two redraws of the clock. Default 1s. \n"
+              "    -a nsdelay    Additional delay between two redraws in nanoseconds. Default 0ns.\n");
+}
+
 int main(int argc, char **argv){
      int c;
 
@@ -565,7 +578,7 @@ int main(int argc, char **argv){
      ttyclock->option.nsdelay = 0; /* -0FPS */
      ttyclock->option.blink = False;
 
-     /* Always show seconds */
+     /* Never show seconds */
      ttyclock->option.second = False;
 
      /* Hide the date */
@@ -573,26 +586,12 @@ int main(int argc, char **argv){
 
      atexit(cleanup);
 
-     while ((c = getopt(argc, argv, "ivScbrhBxnC:d:T:a:")) != -1){
+     while ((c = getopt(argc, argv, "ivcbrhBxnC:d:T:a:")) != -1){
           switch(c)
           {
           case 'h':
           default:
-               printf("usage : tty-clock [-ivScbrahBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] \n"
-                      "    -S            Screensaver mode                               \n"
-                      "    -x            Show box                                       \n"
-                      "    -c            Set the clock at the center of the terminal    \n"
-                      "    -C [0-7]      Set the clock color                            \n"
-                      "    -b            Use bold colors                                \n"
-		              "    -T tty        Display the clock on the specified terminal    \n"
-                      "    -r            Do rebound the clock                           \n"
-		              "    -n            Don't quit on keypress                         \n"
-                      "    -v            Show tty-clock version                         \n"
-                      "    -i            Show some info about tty-clock                 \n"
-                      "    -h            Show this page                                 \n"
-                      "    -B            Enable blinking colon                          \n"
-                      "    -d delay      Set the delay between two redraws of the clock. Default 1s. \n"
-                      "    -a nsdelay    Additional delay between two redraws in nanoseconds. Default 0ns.\n");
+               print_usage();
                exit(EXIT_SUCCESS);
                break;
           case 'i':
@@ -602,9 +601,6 @@ int main(int argc, char **argv){
           case 'v':
                puts("TTY-Clock 2 © devel version");
                exit(EXIT_SUCCESS);
-               break;
-          case 'S':
-               ttyclock->option.screensaver = True;
                break;
           case 'c':
                ttyclock->option.center = True;
@@ -653,6 +649,21 @@ int main(int argc, char **argv){
 	       ttyclock->option.noquit = True;
 	       break;
           }
+     }
+
+     /* Check if short or long break */
+     if (optind < argc){
+        char *argument = argv[optind];
+        if (!strcmp(argument, "short")){
+           printf("short"); 
+        }else if (!strcmp(argument, "long")){
+            printf("long");
+        }else{
+            printf("Command not recognized\n");
+            print_usage();
+            exit(EXIT_FAILURE);
+        }
+        exit(EXIT_SUCCESS);
      }
 
      init();

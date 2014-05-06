@@ -14,8 +14,7 @@ TODO:
 * remove all old references to tty-clock
 * restore + adapt manpage
 
-usage : tty-pomodoro [-ivsScbtrahDBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] 
-    -S            Screensaver mode                               
+usage : tty-pomodoro [-ivscbtrahDBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] 
     -x            Show box                                       
     -c            Set the timer at the center of the terminal    
     -C [0-7]      Set the timer color                            
