@@ -573,7 +573,7 @@ int main(int argc, char **argv){
 
      atexit(cleanup);
 
-     while ((c = getopt(argc, argv, "iuvsScbtrhBxnDC:f:d:T:a:")) != -1){
+     while ((c = getopt(argc, argv, "iuvsScbtrhBxnC:f:d:T:a:")) != -1){
           switch(c)
           {
           case 'h':
@@ -587,14 +587,12 @@ int main(int argc, char **argv){
                       "    -b            Use bold colors                                \n"
                       "    -t            Set the hour in 12h format                     \n"
                       "    -u            Use UTC time                                   \n"
-		      "    -T tty        Display the clock on the specified terminal    \n"
+		              "    -T tty        Display the clock on the specified terminal    \n"
                       "    -r            Do rebound the clock                           \n"
-                      "    -f format     Set the date format                            \n"
-		      "    -n            Don't quit on keypress                         \n"
+		              "    -n            Don't quit on keypress                         \n"
                       "    -v            Show tty-clock version                         \n"
                       "    -i            Show some info about tty-clock                 \n"
                       "    -h            Show this page                                 \n"
-                      "    -D            Hide date                                      \n"
                       "    -B            Enable blinking colon                          \n"
                       "    -d delay      Set the delay between two redraws of the clock. Default 1s. \n"
                       "    -a nsdelay    Additional delay between two redraws in nanoseconds. Default 0ns.\n");
@@ -633,15 +631,9 @@ int main(int argc, char **argv){
           case 'r':
                ttyclock->option.rebound = True;
                break;
-          case 'f':
-               strncpy(ttyclock->option.format, optarg, 100);
-               break;
           case 'd':
                if(atol(optarg) >= 0 && atol(optarg) < 100)
                     ttyclock->option.delay = atol(optarg);
-               break;
-          case 'D':
-               ttyclock->option.date = False;
                break;
           case 'B':
                ttyclock->option.blink = True;
