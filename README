@@ -1,20 +1,29 @@
-usage : tty-clock [-iuvsScbtrahDBxn] [-C [0-7]] [-f format] [-d delay] [-a nsdelay] [-T tty] 
-    -s            Show seconds                                   
+tty-pomodoro
+============
+
+A terminal based pomodoro timer
+
+Current status: in development
+
+TODO:
+
+* remove unnecessary calculations (old clock code)
+* add option for short (5 minute) and long (10 minute) breaks
+* fix issue with 59 and 60 seconds not showing
+* add a notification or sound at the end of time
+
+usage : tty-pomodoro [-ivsScbtrahDBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] 
     -S            Screensaver mode                               
     -x            Show box                                       
-    -c            Set the clock at the center of the terminal    
-    -C [0-7]      Set the clock color                            
+    -c            Set the timer at the center of the terminal    
+    -C [0-7]      Set the timer color                            
     -b            Use bold colors                                
-    -t            Set the hour in 12h format                     
-    -u            Use UTC time                                   
-    -T tty        Display the clock on the specified terminal    
-    -r            Do rebound the clock                           
-    -f format     Set the date format                            
+    -T tty        Display the timer on the specified terminal    
+    -r            Do rebound the timer                           
     -n            Don't quit on keypress                         
-    -v            Show tty-clock version                         
-    -i            Show some info about tty-clock                 
+    -v            Show tty-pomodoro version                         
+    -i            Show some info about tty-pomodoro
     -h            Show this page                                 
-    -D            Hide date                                      
     -B            Enable blinking colon                          
-    -d delay      Set the delay between two redraws of the clock. Default 1s. 
+    -d delay      Set the delay between two redraws of the timer. Default 1s. 
     -a nsdelay    Additional delay between two redraws in nanoseconds. Default 0ns.
