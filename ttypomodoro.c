@@ -524,17 +524,17 @@ void key_event(void){
 void print_usage(){
    printf("usage : tty-clock [-ivcbrahBxn] [-C [0-7]] [-d delay] [-a nsdelay] [-T tty] \n"
               "    -x            Show box                                       \n"
-              "    -c            Set the clock at the center of the terminal    \n"
+              "    -c            Set the timer at the center of the terminal    \n"
               "    -C [0-7]      Set the clock color                            \n"
               "    -b            Use bold colors                                \n"
-              "    -T tty        Display the clock on the specified terminal    \n"
-              "    -r            Do rebound the clock                           \n"
+              "    -T tty        Display the timer on the specified terminal    \n"
+              "    -r            Do rebound the timer                           \n"
               "    -n            Don't quit on keypress                         \n"
-              "    -v            Show tty-clock version                         \n"
-              "    -i            Show some info about tty-clock                 \n"
+              "    -v            Show tty-pomodoro version                      \n"
+              "    -i            Show some info about tty-pomodoro              \n"
               "    -h            Show this page                                 \n"
               "    -B            Enable blinking colon                          \n"
-              "    -d delay      Set the delay between two redraws of the clock. Default 1s. \n"
+              "    -d delay      Set the delay between two redraws of the timer . Default 1s. \n"
               "    -a nsdelay    Additional delay between two redraws in nanoseconds. Default 0ns.\n");
 }
 
@@ -553,7 +553,7 @@ int main(int argc, char **argv){
      /* Default date format */
      strncpy(ttyclock->option.format, "%F", 100);
      /* Default color */
-     ttyclock->option.color = COLOR_GREEN; /* COLOR_GREEN = 2 */
+     ttyclock->option.color = COLOR_RED; 
      /* Default delay */
      ttyclock->option.delay = 1; /* 1FPS */
      ttyclock->option.nsdelay = 0; /* -0FPS */
