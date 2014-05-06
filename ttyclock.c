@@ -193,9 +193,9 @@ void update_hour(void){
 
      /* Custom hour, minute, second */
     
-     int c_hour = 12;
-     int c_minute = 15;
-     int c_second = 20;
+     unsigned int c_hour = 12;
+     unsigned int c_minute = 15;
+     unsigned int c_second = 20;
     
 
      /* Set hour */
